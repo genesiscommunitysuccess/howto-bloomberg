@@ -1,0 +1,1373 @@
+{
+  "meta": {
+    "version": "1.166.0",
+    "generated": "Mon, 06 Jan 2025 16:24:19 GMT"
+  },
+  "data": {
+    "projectName": "howto-bloomberg",
+    "description": "",
+    "components": [
+      "GenesisServerCore",
+      "User Authorization",
+      "EventHandlersCore"
+    ],
+    "tables": [
+      {
+        "name": "MARKET_DATA",
+        "id": 11000,
+        "primaryKey": {
+          "id": null,
+          "name": null,
+          "fields": [
+            "INSTRUMENTID"
+          ],
+          "indexType": "UNIQUE"
+        },
+        "fields": [
+          {
+            "name": "INSTRUMENTID",
+            "nullable": false,
+            "type": "LONG",
+            "meta": {
+              "entityReferenceAttribute": "INSTRUMENTID",
+              "entityReference": "INSTRUMENTS"
+            }
+          },
+          {
+            "name": "BID_PX",
+            "nullable": true,
+            "type": "DOUBLE",
+            "defaultValue": null,
+            "max": null,
+            "min": null
+          },
+          {
+            "name": "BID_SIZE",
+            "nullable": true,
+            "type": "LONG",
+            "defaultValue": null,
+            "max": null,
+            "min": null
+          },
+          {
+            "name": "ASK_SIZE",
+            "nullable": true,
+            "type": "LONG",
+            "defaultValue": null,
+            "max": null,
+            "min": null
+          },
+          {
+            "name": "ASK_PX",
+            "nullable": true,
+            "type": "DOUBLE",
+            "defaultValue": null,
+            "max": null,
+            "min": null
+          }
+        ],
+        "generatedFields": [],
+        "audit": null,
+        "generateCreateUpdateDelete": true,
+        "snapshot": true,
+        "realtimeQueries": [],
+        "indices": [],
+        "meta": {
+          "attrOrder": [
+            "INSTRUMENTID",
+            "BID_PX",
+            "BID_SIZE",
+            "ASK_SIZE",
+            "ASK_PX"
+          ]
+        },
+        "metadata": {
+          "todo": null,
+          "comment": null
+        }
+      },
+      {
+        "name": "TRADES",
+        "id": 11001,
+        "primaryKey": {
+          "id": null,
+          "name": null,
+          "fields": [
+            "TRADEID"
+          ],
+          "indexType": "UNIQUE"
+        },
+        "fields": [
+          {
+            "name": "TRADE_DATE",
+            "type": "DATE",
+            "nullable": true,
+            "defaultValue": null
+          },
+          {
+            "name": "SIDE",
+            "type": "STRING",
+            "maxSize": null,
+            "minSize": null,
+            "nullable": true,
+            "defaultValue": null,
+            "pattern": null
+          },
+          {
+            "name": "VOLUME",
+            "nullable": true,
+            "type": "LONG",
+            "defaultValue": null,
+            "max": null,
+            "min": null
+          },
+          {
+            "name": "PRICE",
+            "nullable": true,
+            "type": "DOUBLE",
+            "defaultValue": null,
+            "max": null,
+            "min": null
+          },
+          {
+            "name": "INSTRUMENTID",
+            "nullable": false,
+            "type": "LONG",
+            "meta": {
+              "entityReferenceAttribute": "INSTRUMENTID",
+              "entityReference": "INSTRUMENTS"
+            }
+          }
+        ],
+        "generatedFields": [
+          {
+            "fieldType": "LONG",
+            "generatedFieldType": "AUTO_INCREMENT",
+            "name": "TRADEID"
+          }
+        ],
+        "audit": null,
+        "generateCreateUpdateDelete": true,
+        "snapshot": true,
+        "realtimeQueries": [],
+        "indices": [],
+        "meta": {
+          "attrOrder": [
+            "TRADEID",
+            "TRADE_DATE",
+            "SIDE",
+            "VOLUME",
+            "PRICE",
+            "INSTRUMENTID"
+          ]
+        },
+        "metadata": {
+          "todo": null,
+          "comment": null
+        }
+      },
+      {
+        "name": "INSTRUMENTS",
+        "id": 11002,
+        "primaryKey": {
+          "id": null,
+          "name": null,
+          "fields": [
+            "INSTRUMENTID"
+          ],
+          "indexType": "UNIQUE"
+        },
+        "fields": [
+          {
+            "name": "SECURITY_NAME",
+            "type": "STRING",
+            "maxSize": null,
+            "minSize": null,
+            "nullable": true,
+            "defaultValue": null,
+            "pattern": null
+          },
+          {
+            "name": "CCY",
+            "type": "STRING",
+            "maxSize": null,
+            "minSize": null,
+            "nullable": true,
+            "defaultValue": null,
+            "pattern": null
+          },
+          {
+            "name": "BBG_TICKER",
+            "type": "STRING",
+            "maxSize": 100,
+            "nullable": false
+          }
+        ],
+        "generatedFields": [
+          {
+            "fieldType": "LONG",
+            "generatedFieldType": "AUTO_INCREMENT",
+            "name": "INSTRUMENTID"
+          }
+        ],
+        "audit": null,
+        "generateCreateUpdateDelete": true,
+        "snapshot": true,
+        "realtimeQueries": [],
+        "indices": [],
+        "meta": {
+          "attrOrder": [
+            "INSTRUMENTID",
+            "SECURITY_NAME",
+            "CCY",
+            "BBG_TICKER"
+          ]
+        },
+        "metadata": {
+          "todo": null,
+          "comment": null
+        }
+      }
+    ],
+    "eventHandlers": [
+      {
+        "entityName": "MARKET_DATA",
+        "create": {
+          "enabled": true
+        },
+        "update": {
+          "enabled": true
+        },
+        "delete": {
+          "enabled": true
+        },
+        "type": "crud"
+      },
+      {
+        "entityName": "TRADES",
+        "create": {
+          "enabled": true
+        },
+        "update": {
+          "enabled": true
+        },
+        "delete": {
+          "enabled": true
+        },
+        "type": "crud"
+      },
+      {
+        "entityName": "INSTRUMENTS",
+        "create": {
+          "enabled": true
+        },
+        "update": {
+          "enabled": true
+        },
+        "delete": {
+          "enabled": true
+        },
+        "type": "crud"
+      }
+    ],
+    "consolidators": [],
+    "pipelines": [],
+    "ui": {
+      "config": null,
+      "routes": [
+        {
+          "id": "5716d2e3-c36d-4667-ae5d-ce735e573ce8",
+          "name": "HOME",
+          "layoutType": null,
+          "permissions": null,
+          "tiles": [
+            {
+              "title": "All Trades",
+              "type": "grid-pro",
+              "config": {
+                "resourceName": "ALL_TRADES",
+                "permissions": null,
+                "reqrep": false,
+                "gridOptions": {
+                  "columns": [
+                    {
+                      "field": "TRADE_DATE",
+                      "meta": {
+                        "gridDisplay": {
+                          "mode": "visible",
+                          "type": "date",
+                          "format": "Unformatted",
+                          "year": "2-digit",
+                          "month": "2-digit",
+                          "day": "2-digit"
+                        },
+                        "attribute": "TRADE_DATE",
+                        "displayName": "Trade Date",
+                        "alias": null,
+                        "id": "TRADE_DATEID"
+                      }
+                    },
+                    {
+                      "field": "SIDE",
+                      "meta": {
+                        "gridDisplay": {
+                          "mode": "visible",
+                          "type": "string"
+                        },
+                        "attribute": "SIDE",
+                        "displayName": "Side",
+                        "alias": null,
+                        "id": "SIDEID"
+                      }
+                    },
+                    {
+                      "field": "VOLUME",
+                      "valueFormatter": {
+                        "type": "function",
+                        "name": "getNumberFormatter",
+                        "category": "formatter",
+                        "arguments": [
+                          "0,0",
+                          null
+                        ]
+                      },
+                      "meta": {
+                        "gridDisplay": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 0
+                        },
+                        "attribute": "VOLUME",
+                        "displayName": "Volume",
+                        "alias": null,
+                        "id": "VOLUMEID"
+                      }
+                    },
+                    {
+                      "field": "PRICE",
+                      "valueFormatter": {
+                        "type": "function",
+                        "name": "getNumberFormatter",
+                        "category": "formatter",
+                        "arguments": [
+                          "0,0.00",
+                          null
+                        ]
+                      },
+                      "meta": {
+                        "gridDisplay": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 2
+                        },
+                        "attribute": "PRICE",
+                        "displayName": "Price",
+                        "alias": null,
+                        "id": "PRICEID"
+                      }
+                    },
+                    {
+                      "field": "INSTRUMENTID",
+                      "hide": true,
+                      "meta": {
+                        "gridDisplay": {
+                          "mode": "hidden"
+                        },
+                        "attribute": "INSTRUMENTID",
+                        "displayName": "Instrumentid",
+                        "alias": null,
+                        "id": "INSTRUMENTIDID"
+                      }
+                    },
+                    {
+                      "field": "SECURITY_NAME",
+                      "meta": {
+                        "gridDisplay": {
+                          "mode": "visible",
+                          "type": "string"
+                        },
+                        "attribute": "SECURITY_NAME",
+                        "displayName": "Security Name",
+                        "alias": null,
+                        "id": "SECURITY_NAMEID"
+                      }
+                    },
+                    {
+                      "field": "CCY",
+                      "meta": {
+                        "gridDisplay": {
+                          "mode": "visible",
+                          "type": "string"
+                        },
+                        "attribute": "CCY",
+                        "displayName": "Ccy",
+                        "alias": null,
+                        "id": "CCYID"
+                      }
+                    },
+                    {
+                      "field": "TRADEID",
+                      "meta": {
+                        "gridDisplay": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Unformatted",
+                          "decimalPlaces": 0
+                        },
+                        "attribute": "TRADEID",
+                        "displayName": "Tradeid",
+                        "alias": null,
+                        "id": "TRADEIDID"
+                      }
+                    }
+                  ]
+                },
+                "meta": {
+                  "configAttrNames": [
+                    {
+                      "name": "TRADE_DATE",
+                      "alias": null
+                    },
+                    {
+                      "name": "SIDE",
+                      "alias": null
+                    },
+                    {
+                      "name": "VOLUME",
+                      "alias": null
+                    },
+                    {
+                      "name": "PRICE",
+                      "alias": null
+                    },
+                    {
+                      "name": "INSTRUMENTID",
+                      "alias": null
+                    },
+                    {
+                      "name": "SECURITY_NAME",
+                      "alias": null
+                    },
+                    {
+                      "name": "CCY",
+                      "alias": null
+                    },
+                    {
+                      "name": "TRADEID",
+                      "alias": null
+                    }
+                  ],
+                  "inactiveGridConfig": []
+                }
+              },
+              "meta": {}
+            }
+          ]
+        },
+        {
+          "id": "fc80faec-95ff-4675-acf8-ba06e9733518",
+          "name": "ADMIN",
+          "layoutType": null,
+          "permissions": null,
+          "tiles": [
+            {
+              "title": "Instruments",
+              "type": "entity-manager",
+              "config": {
+                "resourceName": "INSTRUMENTS",
+                "permissions": null,
+                "updateEvent": "EVENT_INSTRUMENTS_MODIFY",
+                "deleteEvent": "EVENT_INSTRUMENTS_DELETE",
+                "createEvent": "EVENT_INSTRUMENTS_INSERT",
+                "customEvents": null,
+                "modalPosition": "centre",
+                "sizeColumnsToFit": true,
+                "enableSearchBar": false,
+                "reqrep": true,
+                "columns": [
+                  {
+                    "field": "INSTRUMENTID",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "numeric",
+                        "format": "Unformatted",
+                        "decimalPlaces": 0
+                      },
+                      "attribute": "INSTRUMENTID",
+                      "displayName": "Instrumentid",
+                      "alias": null,
+                      "entity": "INSTRUMENTS",
+                      "id": "INSTRUMENTIDID"
+                    }
+                  },
+                  {
+                    "field": "SECURITY_NAME",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "SECURITY_NAME",
+                      "displayName": "Security Name",
+                      "alias": null,
+                      "entity": "INSTRUMENTS",
+                      "id": "SECURITY_NAMEID"
+                    }
+                  },
+                  {
+                    "field": "CCY",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "CCY",
+                      "displayName": "Ccy",
+                      "alias": null,
+                      "entity": "INSTRUMENTS",
+                      "id": "CCYID"
+                    }
+                  },
+                  {
+                    "field": "BBG_TICKER",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "BBG_TICKER",
+                      "displayName": "Bbg Ticker",
+                      "alias": null,
+                      "entity": "INSTRUMENTS",
+                      "id": "BBG_TICKERID"
+                    }
+                  }
+                ],
+                "createFormUiSchema": {
+                  "type": "VerticalLayout",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "label": "Instrumentid",
+                      "scope": "#/properties/INSTRUMENTID",
+                      "options": {
+                        "hidden": true
+                      },
+                      "meta": {
+                        "createForm": {
+                          "mode": "hidden"
+                        },
+                        "alias": null,
+                        "attribute": "INSTRUMENTID",
+                        "entity": "INSTRUMENTS",
+                        "id": "INSTRUMENTIDID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Security Name",
+                      "scope": "#/properties/SECURITY_NAME",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "SECURITY_NAME",
+                        "entity": "INSTRUMENTS",
+                        "id": "SECURITY_NAMEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Ccy",
+                      "scope": "#/properties/CCY",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "CCY",
+                        "entity": "INSTRUMENTS",
+                        "id": "CCYID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Bbg Ticker",
+                      "scope": "#/properties/BBG_TICKER",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "BBG_TICKER",
+                        "entity": "INSTRUMENTS",
+                        "id": "BBG_TICKERID"
+                      }
+                    }
+                  ]
+                },
+                "updateFormUiSchema": {
+                  "type": "VerticalLayout",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "label": "Instrumentid",
+                      "scope": "#/properties/INSTRUMENTID",
+                      "options": {
+                        "readonly": true
+                      },
+                      "meta": {
+                        "updateForm": {
+                          "mode": "read-only"
+                        },
+                        "alias": null,
+                        "attribute": "INSTRUMENTID",
+                        "entity": "INSTRUMENTS",
+                        "id": "INSTRUMENTIDID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Security Name",
+                      "scope": "#/properties/SECURITY_NAME",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "SECURITY_NAME",
+                        "entity": "INSTRUMENTS",
+                        "id": "SECURITY_NAMEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Ccy",
+                      "scope": "#/properties/CCY",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "CCY",
+                        "entity": "INSTRUMENTS",
+                        "id": "CCYID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Bbg Ticker",
+                      "scope": "#/properties/BBG_TICKER",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "BBG_TICKER",
+                        "entity": "INSTRUMENTS",
+                        "id": "BBG_TICKERID"
+                      }
+                    }
+                  ]
+                },
+                "entityName": "Instruments",
+                "meta": {
+                  "inactiveGridConfig": [],
+                  "inactiveFormConfig": [],
+                  "configAttrNames": [
+                    {
+                      "name": "INSTRUMENTID",
+                      "alias": null
+                    },
+                    {
+                      "name": "SECURITY_NAME",
+                      "alias": null
+                    },
+                    {
+                      "name": "CCY",
+                      "alias": null
+                    },
+                    {
+                      "name": "BBG_TICKER",
+                      "alias": null
+                    }
+                  ]
+                }
+              },
+              "meta": {}
+            },
+            {
+              "title": "Trades",
+              "type": "entity-manager",
+              "config": {
+                "resourceName": "TRADES",
+                "permissions": null,
+                "updateEvent": "EVENT_TRADES_MODIFY",
+                "deleteEvent": "EVENT_TRADES_DELETE",
+                "createEvent": "EVENT_TRADES_INSERT",
+                "customEvents": null,
+                "modalPosition": "centre",
+                "sizeColumnsToFit": true,
+                "enableSearchBar": false,
+                "reqrep": true,
+                "columns": [
+                  {
+                    "field": "TRADE_DATE",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "date",
+                        "format": "Unformatted",
+                        "year": "2-digit",
+                        "month": "2-digit",
+                        "day": "2-digit"
+                      },
+                      "attribute": "TRADE_DATE",
+                      "displayName": "Trade Date",
+                      "alias": null,
+                      "entity": "TRADES",
+                      "id": "TRADE_DATEID"
+                    }
+                  },
+                  {
+                    "field": "SIDE",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "string",
+                        "format": "Input"
+                      },
+                      "attribute": "SIDE",
+                      "displayName": "Side",
+                      "alias": null,
+                      "entity": "TRADES",
+                      "id": "SIDEID"
+                    }
+                  },
+                  {
+                    "field": "VOLUME",
+                    "valueFormatter": {
+                      "type": "function",
+                      "name": "getNumberFormatter",
+                      "category": "formatter",
+                      "arguments": [
+                        "0,0",
+                        null
+                      ]
+                    },
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "numeric",
+                        "format": "Financial",
+                        "currency": "$ English (US)",
+                        "decimalPlaces": 0
+                      },
+                      "attribute": "VOLUME",
+                      "displayName": "Volume",
+                      "alias": null,
+                      "entity": "TRADES",
+                      "id": "VOLUMEID"
+                    }
+                  },
+                  {
+                    "field": "PRICE",
+                    "valueFormatter": {
+                      "type": "function",
+                      "name": "getNumberFormatter",
+                      "category": "formatter",
+                      "arguments": [
+                        "0,0.00",
+                        null
+                      ]
+                    },
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "numeric",
+                        "format": "Financial",
+                        "currency": "$ English (US)",
+                        "decimalPlaces": 2
+                      },
+                      "attribute": "PRICE",
+                      "displayName": "Price",
+                      "alias": null,
+                      "entity": "TRADES",
+                      "id": "PRICEID"
+                    }
+                  },
+                  {
+                    "field": "INSTRUMENTID",
+                    "hide": true,
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "hidden"
+                      },
+                      "attribute": "INSTRUMENTID",
+                      "displayName": "Instrumentid",
+                      "alias": null,
+                      "entity": "TRADES",
+                      "id": "INSTRUMENTIDID"
+                    }
+                  },
+                  {
+                    "field": "TRADEID",
+                    "meta": {
+                      "gridDisplay": {
+                        "mode": "visible",
+                        "type": "numeric",
+                        "format": "Unformatted",
+                        "decimalPlaces": 0
+                      },
+                      "attribute": "TRADEID",
+                      "displayName": "Tradeid",
+                      "alias": null,
+                      "entity": "TRADES",
+                      "id": "TRADEIDID"
+                    }
+                  }
+                ],
+                "createFormUiSchema": {
+                  "type": "VerticalLayout",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "label": "Trade Date",
+                      "scope": "#/properties/TRADE_DATE",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "date",
+                          "format": "Unformatted",
+                          "year": "2-digit",
+                          "month": "2-digit",
+                          "day": "2-digit"
+                        },
+                        "alias": null,
+                        "attribute": "TRADE_DATE",
+                        "entity": "TRADES",
+                        "id": "TRADE_DATEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Side",
+                      "scope": "#/properties/SIDE",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "SIDE",
+                        "entity": "TRADES",
+                        "id": "SIDEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Volume",
+                      "scope": "#/properties/VOLUME",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 0
+                        },
+                        "alias": null,
+                        "attribute": "VOLUME",
+                        "entity": "TRADES",
+                        "id": "VOLUMEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Price",
+                      "scope": "#/properties/PRICE",
+                      "options": {},
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 2
+                        },
+                        "alias": null,
+                        "attribute": "PRICE",
+                        "entity": "TRADES",
+                        "id": "PRICEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Instrumentid",
+                      "scope": "#/properties/INSTRUMENTID",
+                      "options": {
+                        "allOptionsResourceName": "INSTRUMENTS",
+                        "valueField": "INSTRUMENTID",
+                        "labelField": "INSTRUMENTID"
+                      },
+                      "meta": {
+                        "createForm": {
+                          "mode": "visible",
+                          "type": "entity-ref",
+                          "attr": "INSTRUMENTID",
+                          "entity": "INSTRUMENTS"
+                        },
+                        "alias": null,
+                        "attribute": "INSTRUMENTID",
+                        "entity": "TRADES",
+                        "id": "INSTRUMENTIDID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Tradeid",
+                      "scope": "#/properties/TRADEID",
+                      "options": {
+                        "hidden": true
+                      },
+                      "meta": {
+                        "createForm": {
+                          "mode": "hidden"
+                        },
+                        "alias": null,
+                        "attribute": "TRADEID",
+                        "entity": "TRADES",
+                        "id": "TRADEIDID"
+                      }
+                    }
+                  ]
+                },
+                "updateFormUiSchema": {
+                  "type": "VerticalLayout",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "label": "Trade Date",
+                      "scope": "#/properties/TRADE_DATE",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "date",
+                          "format": "Unformatted",
+                          "year": "2-digit",
+                          "month": "2-digit",
+                          "day": "2-digit"
+                        },
+                        "alias": null,
+                        "attribute": "TRADE_DATE",
+                        "entity": "TRADES",
+                        "id": "TRADE_DATEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Side",
+                      "scope": "#/properties/SIDE",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "string",
+                          "format": "Input"
+                        },
+                        "alias": null,
+                        "attribute": "SIDE",
+                        "entity": "TRADES",
+                        "id": "SIDEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Volume",
+                      "scope": "#/properties/VOLUME",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 0
+                        },
+                        "alias": null,
+                        "attribute": "VOLUME",
+                        "entity": "TRADES",
+                        "id": "VOLUMEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Price",
+                      "scope": "#/properties/PRICE",
+                      "options": {},
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "numeric",
+                          "format": "Financial",
+                          "currency": "$ English (US)",
+                          "decimalPlaces": 2
+                        },
+                        "alias": null,
+                        "attribute": "PRICE",
+                        "entity": "TRADES",
+                        "id": "PRICEID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Instrumentid",
+                      "scope": "#/properties/INSTRUMENTID",
+                      "options": {
+                        "allOptionsResourceName": "INSTRUMENTS",
+                        "valueField": "INSTRUMENTID",
+                        "labelField": "INSTRUMENTID"
+                      },
+                      "meta": {
+                        "updateForm": {
+                          "mode": "visible",
+                          "type": "entity-ref",
+                          "attr": "INSTRUMENTID",
+                          "entity": "INSTRUMENTS"
+                        },
+                        "alias": null,
+                        "attribute": "INSTRUMENTID",
+                        "entity": "TRADES",
+                        "id": "INSTRUMENTIDID"
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "label": "Tradeid",
+                      "scope": "#/properties/TRADEID",
+                      "options": {
+                        "readonly": true
+                      },
+                      "meta": {
+                        "updateForm": {
+                          "mode": "read-only"
+                        },
+                        "alias": null,
+                        "attribute": "TRADEID",
+                        "entity": "TRADES",
+                        "id": "TRADEIDID"
+                      }
+                    }
+                  ]
+                },
+                "entityName": "Trades",
+                "meta": {
+                  "inactiveGridConfig": [],
+                  "inactiveFormConfig": [],
+                  "configAttrNames": [
+                    {
+                      "name": "TRADE_DATE",
+                      "alias": null
+                    },
+                    {
+                      "name": "SIDE",
+                      "alias": null
+                    },
+                    {
+                      "name": "VOLUME",
+                      "alias": null
+                    },
+                    {
+                      "name": "PRICE",
+                      "alias": null
+                    },
+                    {
+                      "name": "INSTRUMENTID",
+                      "alias": null
+                    },
+                    {
+                      "name": "TRADEID",
+                      "alias": null
+                    }
+                  ]
+                }
+              },
+              "meta": {}
+            }
+          ]
+        }
+      ],
+      "framework": "web components"
+    },
+    "views": [
+      {
+        "name": "TRADES_VIEW",
+        "rootTable": "TRADES",
+        "tableAliases": {
+          "TRADES": "TRADES",
+          "INSTRUMENTS": "INSTRUMENTS",
+          "MARKET_DATA": "MARKET_DATA"
+        },
+        "fields": [
+          {
+            "tableAlias": "TRADES",
+            "sourceField": "TRADEID",
+            "type": "LONG",
+            "viewFieldType": "TABLE",
+            "fieldAlias": null
+          },
+          {
+            "tableAlias": "TRADES",
+            "sourceField": "TRADE_DATE",
+            "type": "DATE",
+            "viewFieldType": "TABLE",
+            "fieldAlias": null
+          },
+          {
+            "tableAlias": "TRADES",
+            "sourceField": "SIDE",
+            "type": "STRING",
+            "viewFieldType": "TABLE",
+            "fieldAlias": null
+          },
+          {
+            "tableAlias": "TRADES",
+            "sourceField": "VOLUME",
+            "type": "LONG",
+            "viewFieldType": "TABLE",
+            "fieldAlias": null
+          },
+          {
+            "tableAlias": "TRADES",
+            "sourceField": "PRICE",
+            "type": "DOUBLE",
+            "viewFieldType": "TABLE",
+            "fieldAlias": null
+          },
+          {
+            "tableAlias": "TRADES",
+            "sourceField": "INSTRUMENTID",
+            "type": "LONG",
+            "viewFieldType": "TABLE",
+            "fieldAlias": null
+          },
+          {
+            "tableAlias": "INSTRUMENTS",
+            "sourceField": "SECURITY_NAME",
+            "type": "STRING",
+            "viewFieldType": "TABLE",
+            "fieldAlias": null
+          },
+          {
+            "tableAlias": "INSTRUMENTS",
+            "sourceField": "CCY",
+            "type": "STRING",
+            "viewFieldType": "TABLE",
+            "fieldAlias": null
+          },
+          {
+            "tableAlias": "INSTRUMENTS",
+            "sourceField": "BBG_TICKER",
+            "type": "STRING",
+            "viewFieldType": "TABLE",
+            "fieldAlias": null
+          },
+          {
+            "tableAlias": "MARKET_DATA",
+            "sourceField": "BID_PX",
+            "type": "DOUBLE",
+            "viewFieldType": "TABLE",
+            "fieldAlias": null
+          },
+          {
+            "tableAlias": "MARKET_DATA",
+            "sourceField": "BID_SIZE",
+            "type": "LONG",
+            "viewFieldType": "TABLE",
+            "fieldAlias": null
+          },
+          {
+            "tableAlias": "MARKET_DATA",
+            "sourceField": "ASK_SIZE",
+            "type": "LONG",
+            "viewFieldType": "TABLE",
+            "fieldAlias": null
+          },
+          {
+            "tableAlias": "MARKET_DATA",
+            "sourceField": "ASK_PX",
+            "type": "DOUBLE",
+            "viewFieldType": "TABLE",
+            "fieldAlias": null
+          }
+        ],
+        "join": {
+          "toTableAlias": "TRADES",
+          "links": [
+            {
+              "joinTo": "INSTRUMENTS",
+              "joinLinkType": "FIELD",
+              "joinType": "OUTER",
+              "backwardsJoin": true,
+              "on": [
+                {
+                  "fromTableAlias": "TRADES",
+                  "fromField": "INSTRUMENTID",
+                  "toTableAlias": "INSTRUMENTS",
+                  "toField": "INSTRUMENTID",
+                  "joinType": "FIELD",
+                  "meta": {
+                    "entityReverse": false
+                  }
+                }
+              ],
+              "join": {
+                "toTableAlias": "TRADES",
+                "links": [
+                  {
+                    "joinTo": "MARKET_DATA",
+                    "joinLinkType": "FIELD",
+                    "joinType": "OUTER",
+                    "backwardsJoin": true,
+                    "on": [
+                      {
+                        "fromTableAlias": "INSTRUMENTS",
+                        "fromField": "INSTRUMENTID",
+                        "toTableAlias": "MARKET_DATA",
+                        "toField": "INSTRUMENTID",
+                        "joinType": "FIELD",
+                        "meta": {
+                          "entityReverse": true
+                        }
+                      }
+                    ],
+                    "join": null
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "snapshot": true,
+        "realtimeQueries": [
+          {
+            "queryName": "ALL_TRADES",
+            "fields": [
+              "TRADEID",
+              "TRADE_DATE",
+              "SIDE",
+              "VOLUME",
+              "PRICE",
+              "INSTRUMENTID",
+              "SECURITY_NAME",
+              "CCY"
+            ]
+          }
+        ]
+      }
+    ],
+    "PBCs": [
+      {
+        "id": "pbc-auth-seed",
+        "config": {}
+      }
+    ],
+    "csv": [
+      {
+        "name": "MARKET_DATA",
+        "fields": [
+          "INSTRUMENTID",
+          "BID_PX",
+          "BID_SIZE",
+          "ASK_SIZE",
+          "ASK_PX"
+        ]
+      },
+      {
+        "name": "TRADES",
+        "fields": [
+          "TRADE_DATE",
+          "SIDE",
+          "VOLUME",
+          "PRICE",
+          "INSTRUMENTID"
+        ]
+      },
+      {
+        "name": "INSTRUMENTS",
+        "fields": [
+          "SECURITY_NAME",
+          "CCY",
+          "BBG_TICKER"
+        ]
+      },
+      {
+        "name": "RIGHT",
+        "fields": [
+          "CODE",
+          "DESCRIPTION"
+        ],
+        "data": []
+      },
+      {
+        "name": "PROFILE",
+        "fields": [
+          "NAME",
+          "DESCRIPTION",
+          "STATUS"
+        ],
+        "data": []
+      },
+      {
+        "name": "PROFILE_RIGHT",
+        "fields": [
+          "PROFILE_NAME",
+          "RIGHT_CODE"
+        ],
+        "data": []
+      }
+    ],
+    "userOverrides": null,
+    "deliveryConfig": {
+      "method": "download",
+      "fileSuffix": "2025-01-06_162418",
+      "excludeGradleWrapper": false
+    },
+    "telemetry": {
+      "deviceId": "8fd4adcf-73f0-4a20-8f11-27c698910f9d",
+      "sessionId": "f7c7be97-f425-4ef2-835c-abc22e3e8ece"
+    }
+  }
+}

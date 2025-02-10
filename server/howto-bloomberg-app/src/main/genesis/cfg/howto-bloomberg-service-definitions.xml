@@ -1,0 +1,15 @@
+<!--
+    Services defined here will define ports and hosts of processes required by the application.
+
+  * Full documentation on service definitions may be found here >> https://docs.genesis.global/docs/develop/server-capabilities/runtime-configuration/service-definition/
+
+-->
+
+<configuration>
+  <service host="localhost" name="HOWTO_BLOOMBERG_MANAGER" port="9700"/>
+
+  <service host="localhost" name="HOWTO_BLOOMBERG_PIPELINES" port="9701"/>
+
+  <!-- This process does the same thing as HOWTO_BLOOMBERG_PIPELINES - therefore only one should be active at a time -->
+  <!--service host="localhost" name="HOWTO_BLOOMBERG_CUSTOM_PROCESS" port="9702"/-->
+</configuration>

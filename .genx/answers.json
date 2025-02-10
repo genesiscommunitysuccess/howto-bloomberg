@@ -1,0 +1,359 @@
+{
+  "apiHost": "ws://localhost:9064",
+  "enableSSO": false,
+  "description": "\n",
+  "groupId": "global.genesis",
+  "applicationVersion": "1.0.0-SNAPSHOT",
+  "enableDeployPlugin": false,
+  "excludeGradleWrapper": false,
+  "csv": [
+    {
+      "name": "MARKET_DATA",
+      "fields": [
+        "INSTRUMENTID",
+        "BID_PX",
+        "BID_SIZE",
+        "ASK_SIZE",
+        "ASK_PX"
+      ]
+    },
+    {
+      "name": "TRADES",
+      "fields": [
+        "TRADE_DATE",
+        "SIDE",
+        "VOLUME",
+        "PRICE",
+        "INSTRUMENTID"
+      ]
+    },
+    {
+      "name": "INSTRUMENTS",
+      "fields": [
+        "SECURITY_NAME",
+        "CCY",
+        "BBG_TICKER"
+      ]
+    },
+    {
+      "name": "RIGHT",
+      "fields": [
+        "CODE",
+        "DESCRIPTION"
+      ],
+      "data": []
+    },
+    {
+      "name": "PROFILE",
+      "fields": [
+        "NAME",
+        "DESCRIPTION",
+        "STATUS"
+      ],
+      "data": []
+    },
+    {
+      "name": "PROFILE_RIGHT",
+      "fields": [
+        "PROFILE_NAME",
+        "RIGHT_CODE"
+      ],
+      "data": []
+    }
+  ],
+  "framework": "webcomponents",
+  "ui": {},
+  "routes": [
+    {
+      "id": "5716d2e3-c36d-4667-ae5d-ce735e573ce8",
+      "name": "HOME",
+      "layoutType": "horizontal-layout",
+      "permissions": null,
+      "tiles": [
+        {
+          "title": "All Trades",
+          "type": "grid-pro",
+          "config": {
+            "resourceName": "ALL_TRADES",
+            "permissions": null,
+            "reqrep": false,
+            "gridOptions": "\n  {\n    columnDefs: [\n     {\n          field: \"TRADE_DATE\",\n     },\n     {\n          field: \"SIDE\",\n     },\n     {\n          field: \"VOLUME\",\n          valueFormatter: getNumberFormatter(\"0,0\", null),\n     },\n     {\n          field: \"PRICE\",\n          valueFormatter: getNumberFormatter(\"0,0.00\", null),\n     },\n     {\n          field: \"INSTRUMENTID\",\n          hide: true,\n     },\n     {\n          field: \"SECURITY_NAME\",\n     },\n     {\n          field: \"CCY\",\n     },\n     {\n          field: \"TRADEID\",\n     }\n],\n  }",
+            "index": 0,
+            "useOnlyTemplateCols": true
+          },
+          "componentName": "HOME-AllTrades-grid",
+          "componentType": "grid",
+          "metadata": {}
+        }
+      ],
+      "layoutKey": "HOME_1736180658921",
+      "FDC3EventHandlersEnabled": false
+    },
+    {
+      "id": "fc80faec-95ff-4675-acf8-ba06e9733518",
+      "name": "ADMIN",
+      "layoutType": "horizontal-layout",
+      "permissions": null,
+      "tiles": [
+        {
+          "title": "Instruments",
+          "type": "entity-manager",
+          "config": {
+            "resourceName": "INSTRUMENTS",
+            "permissions": null,
+            "updateEvent": "EVENT_INSTRUMENTS_MODIFY",
+            "deleteEvent": "EVENT_INSTRUMENTS_DELETE",
+            "createEvent": "EVENT_INSTRUMENTS_INSERT",
+            "customEvents": null,
+            "modalPosition": "centre",
+            "sizeColumnsToFit": true,
+            "enableSearchBar": false,
+            "reqrep": true,
+            "columns": "[\n  {\n    field: \"INSTRUMENTID\",\n  },\n  {\n    field: \"SECURITY_NAME\",\n  },\n  {\n    field: \"CCY\",\n  },\n  {\n    field: \"BBG_TICKER\",\n  }\n]",
+            "createFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Instrumentid\",\n      \"scope\": \"#/properties/INSTRUMENTID\",\n      \"options\": {\n        \"hidden\": true\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Security Name\",\n      \"scope\": \"#/properties/SECURITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Ccy\",\n      \"scope\": \"#/properties/CCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Bbg Ticker\",\n      \"scope\": \"#/properties/BBG_TICKER\",\n      \"options\": {}\n    }\n  ]\n}",
+            "updateFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Instrumentid\",\n      \"scope\": \"#/properties/INSTRUMENTID\",\n      \"options\": {\n        \"readonly\": true\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Security Name\",\n      \"scope\": \"#/properties/SECURITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Ccy\",\n      \"scope\": \"#/properties/CCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Bbg Ticker\",\n      \"scope\": \"#/properties/BBG_TICKER\",\n      \"options\": {}\n    }\n  ]\n}",
+            "entityName": "Instruments",
+            "index": 0,
+            "useOnlyTemplateCols": false
+          },
+          "componentName": "ADMIN-Instruments-manager",
+          "componentType": "manager",
+          "metadata": {}
+        },
+        {
+          "title": "Trades",
+          "type": "entity-manager",
+          "config": {
+            "resourceName": "TRADES",
+            "permissions": null,
+            "updateEvent": "EVENT_TRADES_MODIFY",
+            "deleteEvent": "EVENT_TRADES_DELETE",
+            "createEvent": "EVENT_TRADES_INSERT",
+            "customEvents": null,
+            "modalPosition": "centre",
+            "sizeColumnsToFit": true,
+            "enableSearchBar": false,
+            "reqrep": true,
+            "columns": "[\n  {\n    field: \"TRADE_DATE\",\n  },\n  {\n    field: \"SIDE\",\n  },\n  {\n    field: \"VOLUME\",\n    valueFormatter: getNumberFormatter(\"0,0\", null),\n  },\n  {\n    field: \"PRICE\",\n    valueFormatter: getNumberFormatter(\"0,0.00\", null),\n  },\n  {\n    field: \"INSTRUMENTID\",\n    hide: true,\n  },\n  {\n    field: \"TRADEID\",\n  }\n]",
+            "createFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Trade Date\",\n      \"scope\": \"#/properties/TRADE_DATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Side\",\n      \"scope\": \"#/properties/SIDE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Volume\",\n      \"scope\": \"#/properties/VOLUME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Price\",\n      \"scope\": \"#/properties/PRICE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Instrumentid\",\n      \"scope\": \"#/properties/INSTRUMENTID\",\n      \"options\": {\n        \"allOptionsResourceName\": \"INSTRUMENTS\",\n        \"valueField\": \"INSTRUMENTID\",\n        \"labelField\": \"INSTRUMENTID\"\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Tradeid\",\n      \"scope\": \"#/properties/TRADEID\",\n      \"options\": {\n        \"hidden\": true\n      }\n    }\n  ]\n}",
+            "updateFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Trade Date\",\n      \"scope\": \"#/properties/TRADE_DATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Side\",\n      \"scope\": \"#/properties/SIDE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Volume\",\n      \"scope\": \"#/properties/VOLUME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Price\",\n      \"scope\": \"#/properties/PRICE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Instrumentid\",\n      \"scope\": \"#/properties/INSTRUMENTID\",\n      \"options\": {\n        \"allOptionsResourceName\": \"INSTRUMENTS\",\n        \"valueField\": \"INSTRUMENTID\",\n        \"labelField\": \"INSTRUMENTID\"\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Tradeid\",\n      \"scope\": \"#/properties/TRADEID\",\n      \"options\": {\n        \"readonly\": true\n      }\n    }\n  ]\n}",
+            "entityName": "Trades",
+            "index": 1,
+            "useOnlyTemplateCols": false
+          },
+          "componentName": "ADMIN-Trades-manager",
+          "componentType": "manager",
+          "metadata": {}
+        }
+      ],
+      "layoutKey": "ADMIN_1736180658922",
+      "FDC3EventHandlersEnabled": false
+    }
+  ],
+  "appName": "howto-bloomberg",
+  "pkgName": "howtobloomberg",
+  "directory": "howto-bloomberg",
+  "appSeed": {
+    "type": "local",
+    "name": "blank-app-seed",
+    "description": "Genesis Blank App Seed Configuration",
+    "version": "3.38.2",
+    "date": "2025-01-06T16:24:18.915Z"
+  },
+  "rootElement": "howtobloomberg-root",
+  "localGenId": "HOWTO_BLOOMBERG",
+  "applicationVersionWeb": "1.0.0",
+  "versions": {
+    "UI": "14.218.2",
+    "GSF": "8.6.4",
+    "Auth": "8.6.0"
+  },
+  "FDC3": {
+    "includeDependencies": false,
+    "channels": []
+  },
+  "additions": [
+    {
+      "apiHost": "ws://localhost:9064",
+      "enableSSO": false,
+      "description": "\n",
+      "groupId": "global.genesis",
+      "applicationVersion": "1.0.0-SNAPSHOT",
+      "enableDeployPlugin": false,
+      "excludeGradleWrapper": false,
+      "csv": [
+        {
+          "name": "MARKET_DATA",
+          "fields": [
+            "INSTRUMENTID",
+            "BID_PX",
+            "BID_SIZE",
+            "ASK_SIZE",
+            "ASK_PX"
+          ]
+        },
+        {
+          "name": "TRADES",
+          "fields": [
+            "TRADE_DATE",
+            "SIDE",
+            "VOLUME",
+            "PRICE",
+            "INSTRUMENTID"
+          ]
+        },
+        {
+          "name": "INSTRUMENTS",
+          "fields": [
+            "SECURITY_NAME",
+            "CCY",
+            "BBG_TICKER"
+          ]
+        },
+        {
+          "name": "RIGHT",
+          "fields": [
+            "CODE",
+            "DESCRIPTION"
+          ],
+          "data": []
+        },
+        {
+          "name": "PROFILE",
+          "fields": [
+            "NAME",
+            "DESCRIPTION",
+            "STATUS"
+          ],
+          "data": []
+        },
+        {
+          "name": "PROFILE_RIGHT",
+          "fields": [
+            "PROFILE_NAME",
+            "RIGHT_CODE"
+          ],
+          "data": []
+        }
+      ],
+      "framework": "webcomponents",
+      "ui": {},
+      "routes": [
+        {
+          "id": "5716d2e3-c36d-4667-ae5d-ce735e573ce8",
+          "name": "HOME",
+          "layoutType": "horizontal-layout",
+          "permissions": null,
+          "tiles": [
+            {
+              "title": "All Trades",
+              "type": "grid-pro",
+              "config": {
+                "resourceName": "ALL_TRADES",
+                "permissions": null,
+                "reqrep": false,
+                "gridOptions": "\n  {\n    columnDefs: [\n     {\n          field: \"TRADE_DATE\",\n     },\n     {\n          field: \"SIDE\",\n     },\n     {\n          field: \"VOLUME\",\n          valueFormatter: getNumberFormatter(\"0,0\", null),\n     },\n     {\n          field: \"PRICE\",\n          valueFormatter: getNumberFormatter(\"0,0.00\", null),\n     },\n     {\n          field: \"INSTRUMENTID\",\n          hide: true,\n     },\n     {\n          field: \"SECURITY_NAME\",\n     },\n     {\n          field: \"CCY\",\n     },\n     {\n          field: \"TRADEID\",\n     }\n],\n  }",
+                "index": 0,
+                "useOnlyTemplateCols": true
+              },
+              "componentName": "HOME-AllTrades-grid",
+              "componentType": "grid",
+              "metadata": {}
+            }
+          ],
+          "layoutKey": "HOME_1736180658921",
+          "FDC3EventHandlersEnabled": false
+        },
+        {
+          "id": "fc80faec-95ff-4675-acf8-ba06e9733518",
+          "name": "ADMIN",
+          "layoutType": "horizontal-layout",
+          "permissions": null,
+          "tiles": [
+            {
+              "title": "Instruments",
+              "type": "entity-manager",
+              "config": {
+                "resourceName": "INSTRUMENTS",
+                "permissions": null,
+                "updateEvent": "EVENT_INSTRUMENTS_MODIFY",
+                "deleteEvent": "EVENT_INSTRUMENTS_DELETE",
+                "createEvent": "EVENT_INSTRUMENTS_INSERT",
+                "customEvents": null,
+                "modalPosition": "centre",
+                "sizeColumnsToFit": true,
+                "enableSearchBar": false,
+                "reqrep": true,
+                "columns": "[\n  {\n    field: \"INSTRUMENTID\",\n  },\n  {\n    field: \"SECURITY_NAME\",\n  },\n  {\n    field: \"CCY\",\n  },\n  {\n    field: \"BBG_TICKER\",\n  }\n]",
+                "createFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Instrumentid\",\n      \"scope\": \"#/properties/INSTRUMENTID\",\n      \"options\": {\n        \"hidden\": true\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Security Name\",\n      \"scope\": \"#/properties/SECURITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Ccy\",\n      \"scope\": \"#/properties/CCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Bbg Ticker\",\n      \"scope\": \"#/properties/BBG_TICKER\",\n      \"options\": {}\n    }\n  ]\n}",
+                "updateFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Instrumentid\",\n      \"scope\": \"#/properties/INSTRUMENTID\",\n      \"options\": {\n        \"readonly\": true\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Security Name\",\n      \"scope\": \"#/properties/SECURITY_NAME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Ccy\",\n      \"scope\": \"#/properties/CCY\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Bbg Ticker\",\n      \"scope\": \"#/properties/BBG_TICKER\",\n      \"options\": {}\n    }\n  ]\n}",
+                "entityName": "Instruments",
+                "index": 0,
+                "useOnlyTemplateCols": false
+              },
+              "componentName": "ADMIN-Instruments-manager",
+              "componentType": "manager",
+              "metadata": {}
+            },
+            {
+              "title": "Trades",
+              "type": "entity-manager",
+              "config": {
+                "resourceName": "TRADES",
+                "permissions": null,
+                "updateEvent": "EVENT_TRADES_MODIFY",
+                "deleteEvent": "EVENT_TRADES_DELETE",
+                "createEvent": "EVENT_TRADES_INSERT",
+                "customEvents": null,
+                "modalPosition": "centre",
+                "sizeColumnsToFit": true,
+                "enableSearchBar": false,
+                "reqrep": true,
+                "columns": "[\n  {\n    field: \"TRADE_DATE\",\n  },\n  {\n    field: \"SIDE\",\n  },\n  {\n    field: \"VOLUME\",\n    valueFormatter: getNumberFormatter(\"0,0\", null),\n  },\n  {\n    field: \"PRICE\",\n    valueFormatter: getNumberFormatter(\"0,0.00\", null),\n  },\n  {\n    field: \"INSTRUMENTID\",\n    hide: true,\n  },\n  {\n    field: \"TRADEID\",\n  }\n]",
+                "createFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Trade Date\",\n      \"scope\": \"#/properties/TRADE_DATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Side\",\n      \"scope\": \"#/properties/SIDE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Volume\",\n      \"scope\": \"#/properties/VOLUME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Price\",\n      \"scope\": \"#/properties/PRICE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Instrumentid\",\n      \"scope\": \"#/properties/INSTRUMENTID\",\n      \"options\": {\n        \"allOptionsResourceName\": \"INSTRUMENTS\",\n        \"valueField\": \"INSTRUMENTID\",\n        \"labelField\": \"INSTRUMENTID\"\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Tradeid\",\n      \"scope\": \"#/properties/TRADEID\",\n      \"options\": {\n        \"hidden\": true\n      }\n    }\n  ]\n}",
+                "updateFormUiSchema": "{\n  \"type\": \"VerticalLayout\",\n  \"elements\": [\n    {\n      \"type\": \"Control\",\n      \"label\": \"Trade Date\",\n      \"scope\": \"#/properties/TRADE_DATE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Side\",\n      \"scope\": \"#/properties/SIDE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Volume\",\n      \"scope\": \"#/properties/VOLUME\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Price\",\n      \"scope\": \"#/properties/PRICE\",\n      \"options\": {}\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Instrumentid\",\n      \"scope\": \"#/properties/INSTRUMENTID\",\n      \"options\": {\n        \"allOptionsResourceName\": \"INSTRUMENTS\",\n        \"valueField\": \"INSTRUMENTID\",\n        \"labelField\": \"INSTRUMENTID\"\n      }\n    },\n    {\n      \"type\": \"Control\",\n      \"label\": \"Tradeid\",\n      \"scope\": \"#/properties/TRADEID\",\n      \"options\": {\n        \"readonly\": true\n      }\n    }\n  ]\n}",
+                "entityName": "Trades",
+                "index": 1,
+                "useOnlyTemplateCols": false
+              },
+              "componentName": "ADMIN-Trades-manager",
+              "componentType": "manager",
+              "metadata": {}
+            }
+          ],
+          "layoutKey": "ADMIN_1736180658922",
+          "FDC3EventHandlersEnabled": false
+        }
+      ],
+      "appName": "howto-bloomberg",
+      "pkgName": "howto-bloomberg",
+      "directory": "/tmp/tmp-19-eZ1px9q3CrRD/howto-bloomberg",
+      "appSeed": {
+        "type": "local",
+        "name": "pbc-auth-seed",
+        "date": "2025-01-06T16:24:19.390Z"
+      },
+      "rootElement": "howtobloomberg-root",
+      "localGenId": "HOWTO_BLOOMBERG",
+      "applicationVersionWeb": "1.0.0",
+      "versions": {
+        "prerequisites": {
+          "foundationUI": "14.*",
+          "gsf": "8.*"
+        },
+        "dependencies": {
+          "authClientVersion": "1.0.9",
+          "authServerVersion": "8.6.0"
+        }
+      },
+      "FDC3": {
+        "includeDependencies": false,
+        "channels": []
+      },
+      "date": "Mon Jan 06 2025 16:24:19 GMT+0000 (Coordinated Universal Time)",
+      "utils": {
+        "changeCase": {}
+      }
+    }
+  ]
+}

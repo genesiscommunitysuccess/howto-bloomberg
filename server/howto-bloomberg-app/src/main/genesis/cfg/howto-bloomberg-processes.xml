@@ -1,0 +1,46 @@
+<!--
+    Processes defined here will run the application.
+
+  * Full documentation on process definitions may be found here >> https://docs.genesis.global/docs/develop/server-capabilities/runtime-configuration/processes/
+
+-->
+
+<processes>
+  <process name="HOWTO_BLOOMBERG_MANAGER">
+    <groupId>HOWTO_BLOOMBERG</groupId>
+    <start>true</start>
+    <options>-Xmx512m -DRedirectStreamsToLog=true</options>
+    <module>genesis-pal-eventhandler,genesis-pal-requestserver,genesis-pal-dataserver</module>
+    <package>global.genesis.dataserver.pal,global.genesis.eventhandler.pal,global.genesis.requestreply.pal</package>
+    <script>howto-bloomberg-eventhandler.kts,howto-bloomberg-reqrep.kts,howto-bloomberg-dataserver.kts</script>
+    <description>Management of eventhandler, request server and data server processes</description>
+    <classpath>howto-bloomberg-app*</classpath>
+    <language>pal</language>
+  </process>
+
+  <process name="HOWTO_BLOOMBERG_PIPELINES">
+    <groupId>HOWTO_BLOOMBERG</groupId>
+    <start>true</start>
+    <options>-Xmx512m -DRedirectStreamsToLog=true</options>
+    <module>genesis-pal-datapipeline</module>
+    <package>global.genesis.pipeline</package>
+    <script>howto-bloomberg-pipelines.kts</script>
+    <description>Integration with Bloomberg B-PIPE</description>
+    <classpath>howto-bloomberg-app*</classpath>
+    <language>pal</language>
+  </process>
+
+  <!-- This process does the same thing as HOWTO_BLOOMBERG_PIPELINES - therefore only one should be active at a time -->
+  <!--process name="HOWTO_BLOOMBERG_CUSTOM_PROCESS">
+    <groupId>HOWTO_BLOOMBERG</groupId>
+    <start>true</start>
+    <options>-Xmx512m -DRedirectStreamsToLog=true</options>
+    <module>genesis-pal-datapipelines</module>
+    <package>global.genesis.bloomberg</package>
+    <script>custom-bloomberg.kts</script>
+    <description>Integration with Bloomberg B-PIPE using custom code</description>
+    <classpath>howto-bloomberg-app*</classpath>
+    <language>pal</language>
+  </process-->
+
+</processes>
